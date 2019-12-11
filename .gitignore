@@ -1,3 +1,4 @@
 
 *.key
 *.pem
+config/db.js

@@ -1,11 +1,34 @@
-var express = require('express');
-var fs = require('fs');
-var router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
+const db = require("../config/db");
 
-router.get('/', function (req, res) {
-    fs.readFile(__dirname + "/../json/" + req.query.node + ".json", "utf8", function (err, data) {
-        res.end(data);
-    })
-});
+module.exports = function (app, db) {
+    app.get('/post', function (req, res) {
 
-module.exports = router;
+        if (req.query.node === "all") {
+            db.collection('post').find({}).sort({ "id": -1 }).toArray(function (err, result) {
+                if (err) {
+                    res.send("error");
+                } else {
+                    res.end(JSON.stringify(result));
+                }
+            });
+        } else if (req.query.node === "hot") {
+            db.collection('post').find({}).sort({ "id": -1 }).toArray(function (err, result) {
+                if (err) {
+                    res.send("error");
+                } else {
+                    res.end(JSON.stringify(result));
+                }
+            });
+        } else {
+            db.collection('post').find({ "node": req.query.node }).sort({ "id": -1 }).toArray(function (err, result) {
+                if (err) {
+                    res.send("error");
+                } else {
+                    res.end(JSON.stringify(result));
+                }
+            });
+        }
+
+    });
+};

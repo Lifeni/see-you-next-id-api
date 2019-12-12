@@ -20,6 +20,7 @@ module.exports = function (app, db) {
         console.log("内容：\n" + data.content);
 
         db.collection('post').update({ "id": data.postId }, { $push: { "reply": insert } })
+        db.collection('post').update({ "id": data.postId }, { $inc: { "reply_count": 1 } })
 
         res.end("ok");
 
@@ -30,5 +31,8 @@ function getCurrentTime() {
     var date = new Date();
     var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    return date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    var second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }

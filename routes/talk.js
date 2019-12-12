@@ -19,8 +19,50 @@ module.exports = function (app, db) {
             title: data.title,
             author: data.user,
             content: data.content,
-            emoji: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            reply: []
+            emoji: [{
+                id: 0,
+                code: "👍",
+                count: 0,
+            }, {
+                id: 1,
+                code: "👎",
+                count: 0,
+            }, {
+                id: 2,
+                code: "😂",
+                count: 0,
+            }, {
+                id: 3,
+                code: "🙃",
+                count: 0,
+            }, {
+                id: 4,
+                code: "💩",
+                count: 0,
+            }, {
+                id: 5,
+                code: "🤔",
+                count: 0,
+            }, {
+                id: 6,
+                code: "👀",
+                count: 0,
+            }, {
+                id: 7,
+                code: "💊",
+                count: 0,
+            }, {
+                id: 8,
+                code: "🎉",
+                count: 0,
+            }, {
+                id: 9,
+                code: "🚩",
+                count: 0,
+            },],
+            reply: [],
+            reply_count: 0,
+            emoji_count: 0
         }
         db.collection('post').insert(insert, function (err, result) {
             if (err) {
@@ -37,5 +79,8 @@ function getCurrentTime() {
     var date = new Date();
     var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
     var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    return date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    var hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    var second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return date.getFullYear() + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }

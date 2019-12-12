@@ -13,7 +13,7 @@ module.exports = function (app, db) {
 
         db.collection('post').updateOne({ "id": id, "emoji.id": emoji }, { $inc: { "emoji.$.count": value } });
 
-        db.collection('post').update({ "id": data.postId }, { $inc: { "emoji_count": value } })
+        db.collection('post').updateOne({ "id": data.postId }, { $inc: { "emoji_count": value } })
 
         res.end("ok");
 

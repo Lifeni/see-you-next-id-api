@@ -7,6 +7,8 @@
 
 介绍和其余内容见前端部分的 [README.md](https://github.com/Lifeni/see-you-next-id/blob/master/README.md)
 
+**本项目属于学习项目，请勿将代码用于生产环境。**
+
 ## 接口设计
 
 | 接口     | 方法 | 参数                            | 含义                                     |
